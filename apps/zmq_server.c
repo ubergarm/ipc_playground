@@ -1,13 +1,15 @@
-// Hello World server
-
+// Ping Pong based on zmq's Hello World server
 #include <zmq.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 #include <assert.h>
+#include <time.h>
 
 int main(void)
 {
+    struct timespec tsOut, tsIn;
+
     // Socket to talk to clients
     void *context = zmq_ctx_new();
     void *responder = zmq_socket(context, ZMQ_REP);
@@ -15,11 +17,12 @@ int main(void)
     assert (rc == 0);
 
     while (1) {
-        char buffer[10];
-        zmq_recv(responder, buffer, 10, 0);
-        printf("Received Hello\n");
-        zmq_send(responder, "World", 5, 0);
-        sleep(1); // Do some 'work'
+        zmq_recv(responder, (void *)&tsIn, sizeof(tsIn), 0);
+        printf("Received PING\n");
+        clock_gettime(CLOCK_REALTIME, &tsOut);
+        zmq_send(responder, (void *)&tsOut, sizeof(tsOut), 0);
+        printf("Sent PONG\n");
+        //sleep(1); // Do some 'work'
     }
     return 0;
 }
