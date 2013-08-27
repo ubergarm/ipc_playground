@@ -43,6 +43,8 @@
   #   command: /usr/local/src/zeromq3-x/make check chdir=/usr/local/src/zeromq3-x
   # - name: install zeromq
   #   command: /usr/local/src/zeromq3-x/make install chdir=/usr/local/src/zeromq3-x
+  # - name: update library path
+  #   command: /sbin/ldconfig
   
   - name: Done, Give it a try!
     action: debug msg="Done, Give it a try!"
