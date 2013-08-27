@@ -1,0 +1,49 @@
+---
+#this ansible playbook will provision ipc test environment
+- name: install ipc test environment including 0mq
+  hosts: servers
+  user: vagrant
+  sudo: yes
+  tasks:
+
+  # - include: java7.yml
+
+  - name: ensure required apt packages are installed
+    apt: name=$item state=latest
+    with_items:
+    - build-essential
+    - libtool
+    - automake
+    - curl
+    - git
+    # - python-software-properties                                                               
+    # - python-dev
+    # - python-pip
+
+  # - name: ensure required pip packages are installed
+  #   pip: name=$item
+  #   with_items:
+  #   - git+git://github.com/kivy/pyjnius.git
+  #   - pyes
+      
+  # - name: download elasticsearch
+  #   get_url: url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.3.tar.gz dest=/tmp/
+
+  - name: git clone latest zeromq/zermq3-x
+    git: repo=https://github.com/zeromq/zeromq3-x.git dest=/usr/local/src/zeromq3-x/
+  
+  # do this by hand for now, should put into a shell call and make idempotent: 
+  # - name: setup zeromq
+  #   command: /usr/local/src/zeromq3-x/autogen.sh chdir=/usr/local/src/zeromq3-x
+  # - name: configure zeromq with cache on
+  #   command: /usr/local/src/zeromq3-x/configure -C chdir=/usr/local/src/zeromq3-x
+  # - name: make zeromq
+  #   command: /usr/local/src/zeromq3-x/make chdir=/usr/local/src/zeromq3-x
+  # - name: run tests for zeromq
+  #   command: /usr/local/src/zeromq3-x/make check chdir=/usr/local/src/zeromq3-x
+  # - name: install zeromq
+  #   command: /usr/local/src/zeromq3-x/make install chdir=/usr/local/src/zeromq3-x
+  
+  - name: Done, Give it a try!
+    action: debug msg="Done, Give it a try!"
+        
