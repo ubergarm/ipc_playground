@@ -3,18 +3,40 @@ ipc_playground
 
 A vagrant virtualbox to test out various IPCs including 0mq
 
+Output:
+------
+
+*Basic Ping/Pong demo with zmq_send() and zmq_recv()*            
+    Connecting to hello world server…
+    Sending Ping 0…
+    Received PING
+    Sent PONG
+    Received Pong 0 in 0.001820851 sec
+    Sending Ping 1…
+    Received PING
+    Sent PONG
+    Received Pong 1 in 0.001063238 sec
+    Sending Ping 2…
+    Received PING
+    Sent PONG
+    Received Pong 2 in 0.000819637 sec
+    Sending Ping 3…
+    Received PING
+    Sent PONG
+    Received Pong 3 in 0.000326840 sec
+
 
 Try it out!
 -----------
 *Bring up the virtualmachine and provision the server*
 
-    $ vagrant up `can take a while depending on your network speed`
+    $ vagrant up  # can take a while depending on your network speed
     $ vagrant ssh
-    $ sudo -i
-    $ cd /vagrant/
-    `you could mount a dir into main folder to index it at /vagrant/mnt` 
-    `WARNING: crud_dir.py deletes entire index before re-building it!!!`
-    $ crud_dir.py ./files_to_index/
+    $ cd /vagrant/apps
+    $ make
+    $ killall zmq_server
+    $ ./bin/zmq_server &
+    $ ./bin/zmq_client
 
 _Cleaning up_
 
@@ -36,12 +58,16 @@ _To manually clean up stray VMs_
 ####TODO:
 * ~~Base vargrant virtualbox install~~
 * ~~Install build tools~~
-* Install zeromq
-* build test programs
-* print out pretty stats
+* ~~Install zeromq~~
+* ~~Build test programs~~
+* ~~Print out stats~~
+* Improve test program makefile/library
+* Add more demos including pub/sub stuff
+* Add some scripts to run the test suite and print results
 
 
 ####Issues:
+* I'm rusty with Makefiles and C libraries... Oh python how I long for you!
 * Find how to extend a standard earth day to 26+ hours long.
 
 ####Notes:
