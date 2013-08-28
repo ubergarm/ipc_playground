@@ -63,13 +63,12 @@ _To manually clean up stray VMs_
 * ~~Install zeromq~~
 * ~~Build test programs~~
 * ~~Print out stats~~
-* Improve test program makefile/library
+* ~~Improve test program makefile/library~~
 * Add more demos including pub/sub stuff
 * Add some scripts to run the test suite and print results
 
 
 ####Issues:
-* I'm rusty with Makefiles and C libraries... Oh python how I long for you!
 * Find how to extend a standard earth day to 26+ hours long.
 
 ####Notes:
