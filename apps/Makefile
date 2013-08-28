@@ -28,5 +28,6 @@ check:
 
 # The Test
 tests:
+	killall zmq_server
 	./bin/zmq_server &
 	./bin/zmq_client

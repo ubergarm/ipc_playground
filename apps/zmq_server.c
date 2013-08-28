@@ -19,11 +19,10 @@ int main(void)
 
     while (1) {
         zmq_recv(responder, (void *)&tsIn, sizeof(tsIn), 0);
-        printf("Received PING\n");
-        clock_gettime(CLOCK_REALTIME, &tsOut);
+        /* printf("Received PING\n"); */
+        clock_gettime(CLOCK_MONOTONIC, &tsOut);
         zmq_send(responder, (void *)&tsOut, sizeof(tsOut), 0);
-        printf("Sent PONG\n");
-        //sleep(1); // Do some 'work'
+        /* printf("Sent PONG\n"); */
     }
     return 0;
 }

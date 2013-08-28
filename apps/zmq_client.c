@@ -17,10 +17,11 @@ int main(void)
 
     int request_nbr;
     for (request_nbr = 0; request_nbr != 10; request_nbr++) {
-        clock_gettime(CLOCK_REALTIME, &tsOut);
         printf("Sending Ping %d…\n", request_nbr);
+        clock_gettime(CLOCK_MONOTONIC, &tsOut);
         zmq_send(requester, (void *)&tsOut, sizeof(tsOut), 0);
         zmq_recv(requester, (void *)&tsIn, sizeof(tsIn), 0);
+        clock_gettime(CLOCK_MONOTONIC, &tsIn);
         double dt = ts2d(diff(tsOut, tsIn));
         printf("Received Pong %d in %.9lf sec\n", request_nbr, dt);
 
