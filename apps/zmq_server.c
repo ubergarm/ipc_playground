@@ -5,6 +5,7 @@
 #include <string.h>
 #include <assert.h>
 #include <time.h>
+#include "time_utils.h"
 
 int main(void)
 {
